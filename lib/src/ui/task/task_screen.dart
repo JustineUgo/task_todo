@@ -16,11 +16,13 @@ class _TaskScreenState extends State<TaskScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  bool isCompleted = false;
 
   @override
   void initState() {
     _titleController.text = widget.todo?.title ?? '';
     _descriptionController.text = widget.todo?.description ?? '';
+    isCompleted = widget.todo?.isCompleted ?? false;
     super.initState();
   }
 
@@ -148,6 +150,32 @@ class _TaskScreenState extends State<TaskScreen> {
                       return null;
                     },
                   ),
+                  SizedBox(height: 30.h),
+                  Row(
+                    children: [
+                      CupertinoCheckbox(
+                        value: isCompleted,
+                        onChanged: (value) {
+                          setState(() {
+                            isCompleted = value ?? false;
+                          });
+                        },
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Completion Status',
+                            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+                          ),
+                          Text(
+                            'Validate if the task is completed or not',
+                            style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                   const Spacer(),
                   ElevatedButton(
                     onPressed: () {
@@ -156,7 +184,7 @@ class _TaskScreenState extends State<TaskScreen> {
                           id: widget.todo?.id,
                           title: _titleController.text,
                           description: _descriptionController.text,
-                          isCompleted: widget.todo?.isCompleted ?? false,
+                          isCompleted: isCompleted,
                         );
                         if (widget.todo == null) {
                           context.read<HomeProvider>().addTodo(todo);
