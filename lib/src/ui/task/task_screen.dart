@@ -112,23 +112,26 @@ class _TaskScreenState extends State<TaskScreen> {
                   ),
                 ),
                 const Spacer(),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all(const Color(0xFF363ee8)),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.sp, horizontal: 16.sp),
-                      child: Text(
-                        'Submit',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                          fontSize: 16.sp,
+                ElevatedButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(const Color(0xFF363ee8)),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10.sp, horizontal: 16.sp),
+                        child: Text(
+                          'Submit',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                            fontSize: 16.sp,
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ],

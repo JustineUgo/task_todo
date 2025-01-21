@@ -42,92 +42,101 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Create, edit & delete all your tasks gracefully.',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(height: 30.h),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'UNCOMPLETED (5)',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 12.sp,
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              SizedBox(height: 20.h),
-                              const TaskTile(),
-                            ],
-                          ),
-                          SizedBox(height: 30.h),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'COMPLETED (2)',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 12.sp,
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              SizedBox(height: 20.h),
-                              const TaskTile(isCompleted: true),
-                            ],
-                          ),
-                        ],
+            GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Create, edit & delete all your tasks gracefully.',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () => Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => const TaskScreen()),
-                        ),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 10.sp, horizontal: 16.sp),
-                          decoration:
-                              BoxDecoration(borderRadius: BorderRadius.circular(40.r), color: const Color(0xFF363ee8)),
-                          child: Row(
-                            children: [
-                              Text(
-                                'Add Task',
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
+                    SizedBox(height: 20.h),
+                    CupertinoSearchTextField(
+                      borderRadius: BorderRadius.circular(20.r),
+                      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
+                    ),
+                    SizedBox(height: 30.h),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'UNCOMPLETED (5)',
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(width: 8.w),
-                              const CircleAvatar(backgroundColor: Color(0xFFfad975), child: Icon(CupertinoIcons.add))
-                            ],
-                          ),
+                                SizedBox(height: 20.h),
+                                const TaskTile(),
+                              ],
+                            ),
+                            SizedBox(height: 30.h),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'COMPLETED (2)',
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                SizedBox(height: 20.h),
+                                const TaskTile(isCompleted: true),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => const TaskScreen()),
+                          ),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10.sp, horizontal: 16.sp),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(40.r), color: const Color(0xFF363ee8)),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Add Task',
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                SizedBox(width: 8.w),
+                                const CircleAvatar(backgroundColor: Color(0xFFfad975), child: Icon(CupertinoIcons.add))
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
