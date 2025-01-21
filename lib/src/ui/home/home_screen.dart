@@ -83,53 +83,57 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(height: 30.h),
                     Expanded(
                       child: SingleChildScrollView(
-                        child: Consumer<HomeProvider>(builder: (context, todoProvider, child) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'UNCOMPLETED (${todoProvider.todos.uncompleted.length})',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      fontSize: 12.sp,
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w500,
+                        child: Consumer<HomeProvider>(
+                          builder: (context, todoProvider, child) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'UNCOMPLETED (${todoProvider.todos.uncompleted.length})',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 20.h),
-                                  Column(
-                                    children:
-                                        todoProvider.todos.uncompleted.map((todo) => TaskTile(todo: todo)).toList(),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 30.h),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'COMPLETED (${todoProvider.todos.completed.length})',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      fontSize: 12.sp,
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w500,
+                                    SizedBox(height: 20.h),
+                                    Column(
+                                      children:
+                                          todoProvider.todos.uncompleted.map((todo) => TaskTile(todo: todo)).toList(),
                                     ),
-                                  ),
-                                  SizedBox(height: 20.h),
-                                  Column(
-                                    children: todoProvider.todos.completed.map((todo) => TaskTile(todo: todo)).toList(),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          );
-                        }),
+                                  ],
+                                ),
+                                SizedBox(height: 30.h),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'COMPLETED (${todoProvider.todos.completed.length})',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        fontSize: 12.sp,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    SizedBox(height: 20.h),
+                                    Column(
+                                      children:
+                                          todoProvider.todos.completed.map((todo) => TaskTile(todo: todo)).toList(),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                       ),
                     ),
+                    SizedBox(height: 5.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
