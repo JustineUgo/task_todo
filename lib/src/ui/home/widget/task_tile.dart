@@ -25,7 +25,7 @@ class TaskTile extends StatelessWidget {
             ),
             child: isCompleted ? const Center(child: Icon(Icons.check)) : null,
           ),
-          Flexible(
+          Expanded(
             child: Text(
               title,
               style: TextStyle(
