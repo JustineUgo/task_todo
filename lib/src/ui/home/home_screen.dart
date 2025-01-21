@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/src/ui/home/home_provider.dart';
 import 'package:todo/src/ui/home/widget/task_tile.dart';
 import 'package:todo/src/ui/task/task_screen.dart';
+import 'package:todo/src/util/extension.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,6 +15,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String searchTerm = '';
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<HomeProvider>().loadTodos();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,48 +75,61 @@ class _HomeScreenState extends State<HomeScreen> {
                     CupertinoSearchTextField(
                       borderRadius: BorderRadius.circular(20.r),
                       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
+                      onChanged: (value) {
+                        context.read<HomeProvider>().onSearch(value);
+                      },
                     ),
                     SizedBox(height: 30.h),
                     Expanded(
                       child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'UNCOMPLETED (5)',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 12.sp,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w500,
+                        child: Consumer<HomeProvider>(builder: (context, todoProvider, child) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'UNCOMPLETED (${todoProvider.todos.uncompleted.length})',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 20.h),
-                                const TaskTile(),
-                              ],
-                            ),
-                            SizedBox(height: 30.h),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'COMPLETED (2)',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontSize: 12.sp,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w500,
+                                  SizedBox(height: 20.h),
+                                  Column(
+                                    children: todoProvider.todos.uncompleted
+                                        .map((todo) => TaskTile(title: todo.title, isCompleted: todo.isCompleted))
+                                        .toList(),
                                   ),
-                                ),
-                                SizedBox(height: 20.h),
-                                const TaskTile(isCompleted: true),
-                              ],
-                            ),
-                          ],
-                        ),
+                                ],
+                              ),
+                              SizedBox(height: 30.h),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'COMPLETED (${todoProvider.todos.completed.length})',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  SizedBox(height: 20.h),
+                                  Column(
+                                    children: todoProvider.todos.completed
+                                        .map((todo) => TaskTile(title: todo.title, isCompleted: todo.isCompleted))
+                                        .toList(),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        }),
                       ),
                     ),
                     Row(
