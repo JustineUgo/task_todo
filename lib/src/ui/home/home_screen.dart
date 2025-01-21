@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo/src/ui/home/widget/task_tile.dart';
+import 'package:todo/src/ui/task/task_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -100,23 +101,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(vertical: 10.sp, horizontal: 16.sp),
-                        decoration:
-                            BoxDecoration(borderRadius: BorderRadius.circular(40.r), color: const Color(0xFF363ee8)),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Add Task',
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
+                      InkWell(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => const TaskScreen()),
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 10.sp, horizontal: 16.sp),
+                          decoration:
+                              BoxDecoration(borderRadius: BorderRadius.circular(40.r), color: const Color(0xFF363ee8)),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Add Task',
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            SizedBox(width: 8.w),
-                            const CircleAvatar(backgroundColor: Color(0xFFfad975), child: Icon(CupertinoIcons.add))
-                          ],
+                              SizedBox(width: 8.w),
+                              const CircleAvatar(backgroundColor: Color(0xFFfad975), child: Icon(CupertinoIcons.add))
+                            ],
+                          ),
                         ),
                       ),
                     ],
