@@ -32,4 +32,21 @@ class HomeProvider with ChangeNotifier {
     _uiService.showToast(text: 'Task successfully added!', type: ToastType.success);
     await loadTodos();
   }
+
+
+  // Update a todo (e.g., toggle 'isCompleted')
+  Future<void> updateTodo(Todo newTodo) async {
+    var todo = _todos.firstWhere((todo) => todo.id == newTodo.id);
+    todo = Todo(
+      id: newTodo.id,
+      title: newTodo.title,
+      description: newTodo.description,
+      isCompleted: newTodo.isCompleted,
+    );
+
+    await _dbService.updateTodo(todo.toMap());
+
+    _uiService.showToast(text: 'Task updated!', type: ToastType.success);
+    await loadTodos(); 
+  }
 }

@@ -100,9 +100,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   SizedBox(height: 20.h),
                                   Column(
-                                    children: todoProvider.todos.uncompleted
-                                        .map((todo) => TaskTile(title: todo.title, isCompleted: todo.isCompleted))
-                                        .toList(),
+                                    children:
+                                        todoProvider.todos.uncompleted.map((todo) => TaskTile(todo: todo)).toList(),
                                   ),
                                 ],
                               ),
@@ -121,9 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   SizedBox(height: 20.h),
                                   Column(
-                                    children: todoProvider.todos.completed
-                                        .map((todo) => TaskTile(title: todo.title, isCompleted: todo.isCompleted))
-                                        .toList(),
+                                    children: todoProvider.todos.completed.map((todo) => TaskTile(todo: todo)).toList(),
                                   ),
                                 ],
                               ),

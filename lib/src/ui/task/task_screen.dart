@@ -6,8 +6,8 @@ import 'package:todo/src/model/todo_model.dart';
 import 'package:todo/src/ui/home/home_provider.dart';
 
 class TaskScreen extends StatefulWidget {
-  const TaskScreen({super.key});
-
+  const TaskScreen({super.key, this.todo});
+  final Todo? todo;
   @override
   State<TaskScreen> createState() => _TaskScreenState();
 }
@@ -16,6 +16,13 @@ class _TaskScreenState extends State<TaskScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+
+  @override
+  void initState() {
+    _titleController.text = widget.todo?.title ?? '';
+    _descriptionController.text = widget.todo?.description ?? '';
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -146,11 +153,17 @@ class _TaskScreenState extends State<TaskScreen> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         Todo todo = Todo(
+                          id: widget.todo?.id,
                           title: _titleController.text,
                           description: _descriptionController.text,
+                          isCompleted: widget.todo?.isCompleted ?? false,
                         );
+                        if (widget.todo == null) {
+                          context.read<HomeProvider>().addTodo(todo);
+                        } else {
+                          context.read<HomeProvider>().updateTodo(todo);
+                        }
 
-                        context.read<HomeProvider>().addTodo(todo);
                         Navigator.of(context).pop();
                       }
                     },

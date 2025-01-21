@@ -13,7 +13,7 @@ class UIService {
               : ToastificationType.error,
       title: Text(text),
       alignment: Alignment.topCenter,
-      autoCloseDuration: const Duration(seconds: 6),
+      autoCloseDuration: const Duration(seconds: 2),
     );
   }
 }
