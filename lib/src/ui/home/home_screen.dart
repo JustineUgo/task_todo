@@ -73,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SizedBox(height: 20.h),
                     CupertinoSearchTextField(
+                      placeholder: 'Search by title',
                       borderRadius: BorderRadius.circular(20.r),
                       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
                       onChanged: (value) {

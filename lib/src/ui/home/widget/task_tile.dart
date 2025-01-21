@@ -50,20 +50,48 @@ class TaskTile extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Text(
-                todo.title,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  color: todo.isCompleted ? Colors.grey.shade700 : Colors.black,
-                  fontWeight: FontWeight.w500,
-                  decoration: todo.isCompleted ? TextDecoration.lineThrough : null,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    todo.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      color: todo.isCompleted ? Colors.grey.shade700 : Colors.black,
+                      fontWeight: FontWeight.w500,
+                      decoration: todo.isCompleted ? TextDecoration.lineThrough : null,
+                    ),
+                  ),
+                  Text(
+                    todo.description,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 10.sp,
+                      color: todo.isCompleted ? Colors.grey.shade700 : Colors.black,
+                      fontWeight: FontWeight.w400,
+                      decoration: todo.isCompleted ? TextDecoration.lineThrough : null,
+                    ),
+                  ),
+                ],
               ),
             ),
             PopupMenuButton<String>(
               icon: const Icon(Icons.more_vert),
               color: Colors.grey.shade200,
-              onSelected: (value) {},
+              onSelected: (value) {
+                if (value == 'edit') {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) {
+                      return TaskScreen(todo: todo);
+                    }),
+                  );
+                } else if (value == 'delete' && todo.id != null) {
+                  context.read<HomeProvider>().deleteTodo(todo.id!);
+                }
+              },
               itemBuilder: (BuildContext context) {
                 return [
                   PopupMenuItem<String>(

@@ -33,7 +33,6 @@ class HomeProvider with ChangeNotifier {
     await loadTodos();
   }
 
-
   // Update a todo (e.g., toggle 'isCompleted')
   Future<void> updateTodo(Todo newTodo) async {
     var todo = _todos.firstWhere((todo) => todo.id == newTodo.id);
@@ -47,6 +46,14 @@ class HomeProvider with ChangeNotifier {
     await _dbService.updateTodo(todo.toMap());
 
     _uiService.showToast(text: 'Task updated!', type: ToastType.success);
-    await loadTodos(); 
+    await loadTodos();
+  }
+
+  // Delete a todo
+  Future<void> deleteTodo(int id) async {
+    await _dbService.deleteTodo(id);
+
+    _uiService.showToast(text: 'Task deleted!', type: ToastType.info);
+    await loadTodos();
   }
 }
