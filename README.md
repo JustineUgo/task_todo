@@ -36,3 +36,8 @@ To get started with the project, follow these steps:
    ```bash
    $ flutter run
     ```
+
+
+Demo                       |
+:-------------------------:|
+![](https://github.com/JustineUgo/task_todo/blob/main/demo.gif) |
