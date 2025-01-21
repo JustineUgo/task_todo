@@ -40,4 +40,4 @@ To get started with the project, follow these steps:
 
 Demo                       |Screenshot                 |Screenshot                 |
 :-------------------------:|:-------------------------:|:-------------------------:|
-![](https://github.com/JustineUgo/task_todo/blob/main/demo.gif)|![](https://github.com/JustineUgo/task_todo/blob/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-01-21%20at%2023.55.17.png)|![](https://github.com/JustineUgo/task_todo/blob/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-01-21%20at%2023.55.17.png)|
+![](https://github.com/JustineUgo/task_todo/blob/main/demo.gif)|![](https://github.com/JustineUgo/task_todo/blob/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-01-21%20at%2023.55.04.png)|![](https://github.com/JustineUgo/task_todo/blob/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-01-21%20at%2023.55.17.png)|
